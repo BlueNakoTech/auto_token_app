@@ -113,6 +113,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.5"
+  dropdown_button2:
+    dependency: "direct main"
+    description:
+      name: dropdown_button2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.4"
+  dylib:
+    dependency: transitive
+    description:
+      name: dylib
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.3"
   fake_async:
     dependency: transitive
     description:
@@ -139,6 +153,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_libserialport:
+    dependency: "direct main"
+    description:
+      name: flutter_libserialport
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -193,6 +214,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.18.1"
+  libserialport:
+    dependency: transitive
+    description:
+      name: libserialport
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0+3"
   lints:
     dependency: transitive
     description:
@@ -235,6 +263,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
+  platform:
+    dependency: transitive
+    description:
+      name: platform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   process_run:
     dependency: transitive
     description:

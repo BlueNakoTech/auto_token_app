@@ -7,8 +7,10 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
+  dropdown_button2: ^2.1.4
   flutter:
     sdk: flutter
+  flutter_libserialport: ^0.2.3
   get: 4.6.5
   get_cli: ^1.8.1
   window_manager: ^0.3.5

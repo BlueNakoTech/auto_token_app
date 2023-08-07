@@ -1,23 +1,28 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  late SerialPort newport;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  getPortName(SerialPort port) {
+    newport = port;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  serialConnection() async {
+    newport.openReadWrite();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  serialWrites(Uint8List data) {
+    newport.write(data);
   }
 
-  void increment() => count.value++;
+  getData(TextEditingController text) {
+    Uint8List uint8List = Uint8List.fromList(utf8.encode(text.text));
+    serialWrites(uint8List);
+  }
 }

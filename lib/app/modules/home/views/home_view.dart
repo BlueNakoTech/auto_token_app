@@ -1,3 +1,5 @@
+import 'package:auto_token_app/app/widget/num_pad.dart';
+import 'package:auto_token_app/app/widget/serialCOM.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,9 +11,14 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    TextEditingController numPad = TextEditingController();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('HomeView'),
+          leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {},
+          ),
+          title: const Text('Home'),
         ),
         body: Row(
           children: [
@@ -28,11 +35,22 @@ class HomeView extends GetView<HomeController> {
                           width: Get.width,
                           height: Get.height,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              SizedBox(
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 60),
                                 child: TextField(
+                                  cursorHeight: 30,
+                                  keyboardType: TextInputType.number,
+                                  maxLength: 6,
                                   textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
                                   decoration: InputDecoration(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 8),
                                     labelStyle:
                                         const TextStyle(color: Colors.white),
                                     border: OutlineInputBorder(
@@ -44,12 +62,12 @@ class HomeView extends GetView<HomeController> {
                               ),
                               ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      fixedSize: Size(200, 80),
+                                      fixedSize: const Size(180, 50),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20))),
                                   onPressed: () {},
-                                  child: Text("START"))
+                                  child: const Text("START"))
                             ],
                           ),
                         ),
@@ -70,8 +88,34 @@ class HomeView extends GetView<HomeController> {
             Flexible(
                 child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: Colors.red,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Flexible(
+                      child: SizedBox(
+                    child: SerialPortWidget(),
+                  )),
+                  Flexible(
+                    flex: 2,
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: NumPad(
+                        buttonSize: 50,
+                        buttonColor: Colors.grey,
+                        iconColor: Colors.deepOrange,
+                        controller: numPad,
+                        onChange: () {
+                          HomeController().getData(numPad);
+                        },
+                        delete: () {
+                          numPad.text =
+                              numPad.text.substring(0, numPad.text.length - 1);
+                        },
+                        onSubmit: () {},
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ))
           ],
