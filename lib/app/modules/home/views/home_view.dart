@@ -66,7 +66,10 @@ class HomeView extends GetView<HomeController> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20))),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    HomeController()
+                                        .serialWrite(controller.text);
+                                  },
                                   child: const Text("START"))
                             ],
                           ),
@@ -103,13 +106,10 @@ class HomeView extends GetView<HomeController> {
                         buttonSize: 50,
                         buttonColor: Colors.grey,
                         iconColor: Colors.deepOrange,
-                        controller: numPad,
-                        onChange: () {
-                          HomeController().getData(numPad);
-                        },
+                        controller: controller,
                         delete: () {
-                          numPad.text =
-                              numPad.text.substring(0, numPad.text.length - 1);
+                          numPad.text = controller.text
+                              .substring(0, controller.text.length - 1);
                         },
                         onSubmit: () {},
                       ),

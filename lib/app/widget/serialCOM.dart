@@ -2,6 +2,7 @@ import 'package:auto_token_app/app/modules/home/controllers/home_controller.dart
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/utils/grapheme_splitter.dart';
 import 'package:libserialport/libserialport.dart';
 
 class SerialPortWidget extends StatefulWidget {
@@ -77,10 +78,7 @@ class _SerialPortWidgetState extends State<SerialPortWidget> {
           onChanged: (String? value) {
             setState(() {
               selectedValue = value;
-              final name = value;
-              final port = SerialPort(name.toString());
-              controller.getPortName(port);
-              controller.serialConnection();
+              controller.serialConnect(value!);
             });
           },
           buttonStyleData: ButtonStyleData(

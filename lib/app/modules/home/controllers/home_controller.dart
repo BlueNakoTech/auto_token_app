@@ -1,28 +1,39 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  late SerialPort newport;
+  var portName = "";
 
-  getPortName(SerialPort port) {
-    newport = port;
+  getPort(String name) {
+    portName = name;
   }
 
-  serialConnection() async {
-    newport.openReadWrite();
+  serialConnect(String name) async {
+    await getPort(name);
+    print(name);
+    final port = SerialPort(portName);
+
+    port.openReadWrite();
+    if (port.isOpen) {
+      print("ready");
+    }
   }
 
-  serialWrites(Uint8List data) {
-    newport.write(data);
-  }
+  serialWrite(String object) async {
+    final port = SerialPort(portName);
 
-  getData(TextEditingController text) {
-    Uint8List uint8List = Uint8List.fromList(utf8.encode(text.text));
-    serialWrites(uint8List);
+    var data = _stringToUint8List(object);
+    try {
+      print(port.write(data, timeout: 1000));
+    } on SerialPortError catch (err, _) {
+      print(SerialPort.lastError);
+    }
   }
+}
+
+Uint8List _stringToUint8List(String data) {
+  List<int> codeUnits = data.codeUnits;
+  Uint8List uint8list = Uint8List.fromList(codeUnits);
+  return uint8list;
 }
